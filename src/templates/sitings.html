@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+
+{% block title %}{{ block.super }}Current Sitings{% endblock %}
+
+{% block navbar-left %}
+  {% include "_navbar.html" with active_link="about" %}
+{% endblock %}
+
+<!-- Benefits of the Django application -->
+{% block container %}
+<div id="sec3">
+  <div class="container">
+    <div class="row">
+      <div id="map-outer" class="col-md-12">
+        <div id="address" class="col-md-4">
+          <h2>Elephant sitings</h2>
+          <address>
+            <strong>Scroll the map to see the elephant sitings</strong><br>
+            <!-- Taj Mahal<br>
+            Agra<br>
+            Uttar Pradesh<br>
+            India - 282001<br>
+            <abbr>P:</abbr> +91 0562 222 6431 -->
+          </address>
+        </div>
+        <div id="map-container" class="col-md-8"></div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock container %}
+
+{% block scripts %}
+  <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
+ <script type="text/javascript">
+        var locations = [
+        {% for location in locations %}
+         {{location|safe}},
+         {% endfor %}
+        
+         /*  ['5A, near main road, middle of the day', 76.396,11.469, 1],
+          ['7A3C, alala estate, 1 young male', 76.503,11.488, 2],
+          ['2T, only at night, come almost every day', 76.520,11.530, 3],
+          ['4A near road, possibly more, not all visible', 76.370,11.575, 4],
+         ['Stadtbibliothek Graz Ost', 47.06934, 15.45888, 5],
+          ['Stadtbibliothek Graz Süd', 47.04572, 15.43234, 6],
+          ['Stadtbibliothek Graz Nord', 47.08350, 15.43212, 7],
+          ['Stadtbibliothek Andritz', 47.10280, 15.42137, 8]*/
+        ];
+
+        var map = new google.maps.Map(document.getElementById('map-container'), {
+          zoom: 11,
+          center: new google.maps.LatLng(11.50775,76.4711862),
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        });
+
+        var infowindow = new google.maps.InfoWindow();
+
+        var marker, i;
+
+        for (i = 0; i < locations.length; i++) {
+          marker = new google.maps.Marker({
+            position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+            map: map
+          });
+
+          google.maps.event.addListener(marker, 'click', (function(marker, i) {
+            return function() {
+              infowindow.setContent(locations[i][0]);
+              infowindow.open(map, marker);
+            }
+          })(marker, i));
+        }
+      </script>
+{% endblock scripts %}
