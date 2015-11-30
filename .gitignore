@@ -1,33 +1,7 @@
-# Created by https://www.gitignore.io
-
-
-
-
-# Django stuff:
-*.log
-static_root/
-media/
-entri/entri/settings/services_config_prod.py
-
-# Django environ
-.env
-entri/entri/settings/.env
-
-# Celery
-celerybeat-schedule
-celerybeat.pid
-
-### Linux ###
-*~
-
-# KDE directory preferences
-.directory
-
-
-### Python ###
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
+*$py.class
 
 # C extensions
 *.so
@@ -40,6 +14,7 @@ develop-eggs/
 dist/
 downloads/
 eggs/
+.eggs/
 lib/
 lib64/
 parts/
@@ -63,14 +38,22 @@ pip-delete-this-directory.txt
 htmlcov/
 .tox/
 .coverage
+.coverage.*
 .cache
 nosetests.xml
 coverage.xml
+*,cover
 
 # Translations
 *.mo
 *.pot
 
+# Django stuff:
+*.log
+media/
+static_root/
+*.env
+logs/
 
 # Sphinx documentation
 docs/_build/
@@ -78,94 +61,10 @@ docs/_build/
 # PyBuilder
 target/
 
-
-### Django ###
-*.log
-*.pot
-*.pyc
-__pycache__/
-local_settings.py
-
-
-### PyCharm ###
-# Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm
-
-/*.iml
-
-## Directory-based project format:
-.idea/
-# if you remove the above rule, at least ignore the following:
-
-# User-specific stuff:
-# .idea/workspace.xml
-# .idea/tasks.xml
-# .idea/dictionaries
-
-# Sensitive or high-churn files:
-# .idea/dataSources.ids
-# .idea/dataSources.xml
-# .idea/sqlDataSources.xml
-# .idea/dynamic.xml
-# .idea/uiDesigner.xml
-
-# Gradle:
-# .idea/gradle.xml
-# .idea/libraries
-
-# Mongo Explorer plugin:
-# .idea/mongoSettings.xml
-
-## File-based project format:
-*.ipr
-*.iws
-
-## Plugin-specific files:
-
-# IntelliJ
-out/
-
-# mpeltonen/sbt-idea plugin
-.idea_modules/
-
-# JIRA plugin
-atlassian-ide-plugin.xml
-
-# Crashlytics plugin (for Android Studio and IntelliJ)
-com_crashlytics_export_strings.xml
-
-
-### SublimeText ###
-# cache files for sublime text
-*.tmlanguage.cache
-*.tmPreferences.cache
-*.stTheme.cache
-
-# workspace files are user-specific
-*.sublime-workspace
-
-# project files should be checked into the repository, unless a significant
-# proportion of contributors will probably not be using SublimeText
-# *.sublime-project
-
-# sftp configuration file
-sftp-config.json
-
-### Vagrant ###
-.vagrant/
-
 # Swap files (For Vim die hards)
 [._]*.s[a-w][a-z]
 [._]s[a-w][a-z]
 *~
 
-###DS Store###
-entri/.DS_Store
-
-###Pycharm###
-.metadata
-
-### SASS ###
-entri/ui/static_design_revamp/north_south/.sass-cache/
-.sass-cache/
-entri/ui/static_design_revamp/north_south/css/
-
+#don't track app.db - app's sql database
+app.db
