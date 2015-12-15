@@ -9,7 +9,7 @@ from . import views
 urlpatterns = [
     url(r'^$', views.HomePage.as_view(), name='home'),
     url(r'^about/$', views.AboutPage.as_view(), name='about'),
-    url(r'^siting/$', views.SitingPage.as_view(), name='siting'),
+    url(r'^sighting/$', views.SitingPage.as_view(), name='sighting'),
     url(r'^messages/$',views.ReportPage.as_view(), name='messages'),
     url(r'^users/', include(profiles.urls, namespace='profiles')),
     url(r'^admin/', include(admin.site.urls)),

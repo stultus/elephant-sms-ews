@@ -14,13 +14,14 @@ class SitingPage(generic.TemplateView):
 
     def get_context_data(self,**kwargs):
         context = super(SitingPage, self).get_context_data(**kwargs)
-        temp_locations = [list(i) for i in list(Siting.objects.all().values_list('location','message'))]
+        temp_locations = [list(i) for i in list(Siting.objects.all().values_list('created_at','location','message'))]
         locations = []
         for i in temp_locations:
             loc = []
-            loc.append(str(i[1]))
-            loc.append(float(i[0].split(",")[0]))
-            loc.append(float(i[0].split(",")[1]))
+            loc.append(str(i[2]))
+            loc.append(float(i[1].split(",")[0]))
+            loc.append(float(i[1].split(",")[1]))
+            loc.append(str(i[0].date().day)+"-"+str(i[0].date().month)+"-"+str(i[0].date().year) +":")
             locations.append(loc)
         context['locations'] =locations
         return context
@@ -41,6 +42,8 @@ class ReportPage(generic.TemplateView):
             if len(msg_list)>2:
                 if msg_list[1]=='c':
                     siting = Siting()
+                    if not len(msg_list[2].split(','))==2 or not msg_list[2].split(',')[1]:
+                        return context
                     siting.location = msg_list[2]
                     siting.informer = informer
                     if len(msg_list)>3:
