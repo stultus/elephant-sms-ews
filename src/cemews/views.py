@@ -1,5 +1,5 @@
 from django.views import generic
-from reports.models import Siting,Informer
+from reports.models import Siting,Informer,Message
 
 
 class HomePage(generic.TemplateView):
@@ -43,6 +43,10 @@ class ReportPage(generic.TemplateView):
                 if msg_list[1]=='c':
                     siting = Siting()
                     if not len(msg_list[2].split(','))==2 or not msg_list[2].split(',')[1]:
+                        msg_obj = Message()
+                        msg_obj.message = message
+                        msg_obj.informer = informer
+                        msg_obj.save()
                         return context
                     siting.location = msg_list[2]
                     siting.informer = informer

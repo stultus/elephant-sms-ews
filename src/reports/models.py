@@ -28,3 +28,10 @@ class Siting(models.Model):
     def __unicode__(self):
         return self.message
 
+class Message(models.Model):
+    created_at = models.DateTimeField(auto_now_add=True, editable=False)
+    message = models.CharField("Ignored Message", max_length=200)
+    informer = models.ForeignKey(Informer,related_name='messages')
+    def __unicode__(self):
+        return self.message
+

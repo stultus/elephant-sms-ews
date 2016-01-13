@@ -12,7 +12,6 @@
 {% block navbar-right %}
   {% if not user.is_authenticated %}
 <a class="btn btn-default" href="{% url 'accounts:login' %}" role="button">Log in</a>
-<a class="btn btn-primary" href="{% url 'accounts:signup' %}" role="button">Sign up</a>
   {% else %}
     {{ block.super }}
   {% endif %}
@@ -25,7 +24,7 @@
         <div class="col-md-8 col-sm-8">
           <h1>{% include "_brandname.html" %}</h1>
           <p>Crowd sourced elephant presence reporting system.</p>
-	  <a class="btn btn-primary" href="{% url 'siting' %}" role="button">See the sitings</a>
+	  <a class="btn btn-primary" href="{% url 'sighting' %}" role="button">See the sightings</a>
         </div>
         <div class="col-md-4 col-sm-4">
 
