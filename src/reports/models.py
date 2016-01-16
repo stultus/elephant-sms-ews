@@ -21,7 +21,8 @@ class Subscriber(models.Model):
         return self.phone
 
 class Siting(models.Model):
-    created_at = models.DateTimeField(auto_now_add=True, editable=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    created_at.editable=True
     location = models.CharField("Geographic-cordinates of the sitings", max_length=200)
     message = models.CharField("Additional Information", max_length=200,null=True,blank=True)
     informer = models.ForeignKey(Informer,related_name='sitings')
