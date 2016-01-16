@@ -132,15 +132,15 @@ body>.navbar-transparent {
     padding: 120px 0;
 }
 
-#map-outer {
+/*#map-outer {
     height: 440px;
     padding: 40px 20px;
     margin-bottom: 20px;
     background-color:#FFF
-}
+}*/
 
 #map-container {
-    height: 400px
+    height: 600px
 }
 
 .img-dim {
