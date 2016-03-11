@@ -1,5 +1,11 @@
+#! /usr/bin/env python
+# -*- coding: utf-8 -*-
+
 from django.views import generic
 from reports.models import Siting,Informer,Message
+from braces.views import LoginRequiredMixin
+from django.utils import timezone
+
 
 
 class HomePage(generic.TemplateView):
@@ -9,7 +15,7 @@ class HomePage(generic.TemplateView):
 class AboutPage(generic.TemplateView):
     template_name = "about.html"
 
-class SitingPage(generic.TemplateView):
+class SitingPage(LoginRequiredMixin,generic.TemplateView):
     template_name = "sitings.html"
 
     def get_context_data(self,**kwargs):
@@ -34,7 +40,10 @@ class ReportPage(generic.TemplateView):
         phone = self.request.GET['mb'][-10:]
         print phone
         message = self.request.GET['ms']
-        print message
+        try:
+            print message
+        except:
+            return context 
         informer = Informer.objects.filter(phone=phone).first()
         if informer:
             #decide wheather grid system or cordinate system
@@ -42,6 +51,7 @@ class ReportPage(generic.TemplateView):
             if len(msg_list)>2:
                 if msg_list[1]=='c':
                     siting = Siting()
+                    siting.created_at = timezone.now()
                     if not len(msg_list[2].split(','))==2 or not msg_list[2].split(',')[1]:
                         msg_obj = Message()
                         msg_obj.message = message
@@ -54,7 +64,22 @@ class ReportPage(generic.TemplateView):
                         siting.message = " ".join(msg_list[3:])
                     siting.save()
                     print "Info stored successfully"
-
+                else:
+                    siting = Siting()
+                    siting.created_at = timezone.now()
+                    if not len(msg_list[1].split(','))==2 or not msg_list[1].split(',')[1]:
+                        msg_obj = Message()
+                        msg_obj.message = message
+                        msg_obj.informer = informer
+                        msg_obj.save()
+                        msg_obj.save()
+                        return context
+                    siting.location = msg_list[1]
+                    siting.informer = informer
+                    if len(msg_list)>2:
+                        siting.message = " ".join(msg_list[2:])
+                    siting.save()
+                    print "Info stored successfully, the message was not marked with C"
         else:
             print "Unknown informer, discarding the message"
         return context

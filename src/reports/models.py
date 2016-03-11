@@ -21,11 +21,11 @@ class Subscriber(models.Model):
         return self.phone
 
 class Siting(models.Model):
-    created_at = models.DateTimeField(auto_now_add=True)
-    created_at.editable=True
+    created_at = models.DateTimeField()
     location = models.CharField("Geographic-cordinates of the sitings", max_length=200)
     message = models.CharField("Additional Information", max_length=200,null=True,blank=True)
     informer = models.ForeignKey(Informer,related_name='sitings')
+    herd_id = models.CharField("Herd Id", max_length=200,null=True,blank=True)
     def __unicode__(self):
         return self.message
 
