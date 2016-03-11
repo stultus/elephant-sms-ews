@@ -20,7 +20,7 @@ class SitingPage(LoginRequiredMixin,generic.TemplateView):
 
     def get_context_data(self,**kwargs):
         context = super(SitingPage, self).get_context_data(**kwargs)
-        temp_locations = [list(i) for i in list(Siting.objects.all().values_list('created_at','location','message'))]
+        temp_locations = [list(i) for i in list(Siting.objects.all().values_list('created_at','location','message','picture'))]
         locations = []
         for i in temp_locations:
             loc = []
@@ -28,6 +28,8 @@ class SitingPage(LoginRequiredMixin,generic.TemplateView):
             loc.append(float(i[1].split(",")[0]))
             loc.append(float(i[1].split(",")[1]))
             loc.append(str(i[0].date().day)+"-"+str(i[0].date().month)+"-"+str(i[0].date().year) +":")
+            if i[3]:
+                loc.append(str(i[3]))
             locations.append(loc)
         context['locations'] =locations
         return context

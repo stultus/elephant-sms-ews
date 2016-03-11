@@ -60,7 +60,10 @@
 
           google.maps.event.addListener(marker, 'click', (function(marker, i) {
             return function() {
-              infowindow.setContent(locations[i][3]+" "+locations[i][0]);
+              content = "<b>"+locations[i][3]+"</b> "+locations[i][0]
+              if (locations[i][4]!=null)
+                content = content +"<br/> <center> <img width='80' src='/media/" + locations[i][4] + "''></center>"
+              infowindow.setContent(content);
               infowindow.open(map, marker);
             }
           })(marker, i));
