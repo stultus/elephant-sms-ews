@@ -26,6 +26,10 @@ class Siting(models.Model):
     message = models.CharField("Additional Information", max_length=200,null=True,blank=True)
     informer = models.ForeignKey(Informer,related_name='sitings')
     herd_id = models.CharField("Herd Id", max_length=200,null=True,blank=True)
+    picture = models.ImageField('Picture',
+                                upload_to='siting_pics/%Y-%m-%d/',
+                                null=True,
+                                blank=True)
     def __unicode__(self):
         return self.message
 
