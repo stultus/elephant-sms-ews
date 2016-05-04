@@ -13,14 +13,30 @@
 {% block container %}
 <div id="sec3">
   <div class="container">
-    <div class="row">
+      <div class="row">
       <div id="map-container" class="col-md-12">
-                
+      </div>
+    </div>
+    <div class="row">
+      <div id="dropdown" class="col-md-12">
+      <div class="dropdown">
+  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+    Duration
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+    <li><a href="../../sighting/week/">Weekly</a></li>
+    <li><a href="../../sighting/month/">Monthly</a></li>
+    <li><a href="../../sighting/all/">Everything</a></li>
+  </ul>
+</div>
       </div>
     </div>
   </div>
 </div>
 {% endblock container %}
+{% block footer %}
+{% endblock footer %}
 
 {% block scripts %}
   <script src="http://maps.google.com/maps/api/js?sensor=false"></script>

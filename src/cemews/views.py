@@ -6,6 +6,7 @@ from reports.models import Siting,Informer,Message
 from braces.views import LoginRequiredMixin
 from django.utils import timezone
 
+import datetime
 
 
 class HomePage(generic.TemplateView):
@@ -20,7 +21,14 @@ class SitingPage(LoginRequiredMixin,generic.TemplateView):
 
     def get_context_data(self,**kwargs):
         context = super(SitingPage, self).get_context_data(**kwargs)
+        duration = str(kwargs['duration'])
+        print duration
         temp_locations = [list(i) for i in list(Siting.objects.all().values_list('created_at','location','message','picture'))]
+        if duration == "week":
+            temp_locations = [list(i) for i in list(Siting.objects.filter(created_at__lte=timezone.now(),  created_at__gt=timezone.now() - datetime.timedelta(days=7)).values_list('created_at','location','message','picture'))]
+        if duration == "month":
+            temp_locations = [list(i) for i in list(Siting.objects.filter(created_at__lte=timezone.now(),  created_at__gt=timezone.now() - datetime.timedelta(days=30)).values_list('created_at','location','message','picture'))]   
+           
         locations = []
         for i in temp_locations:
             loc = []

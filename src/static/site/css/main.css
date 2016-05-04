@@ -1,8 +1,6 @@
 @import "//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css";
 
-html, body{
-    height:100%;		/* For full height images */
-}
+html, body { height:100%; width:100%;}
 
 .starter-template {
   padding: 40px 15px;
@@ -140,7 +138,25 @@ body>.navbar-transparent {
 }*/
 
 #map-container {
-    height: 600px
+    background:#fff;display: block;
+    position:absolute;
+    height:auto;
+    bottom:0;
+    top:0;
+    left:0;
+    right:0;
+    margin-top:50px; /* adjust top margin to your header height */
+}
+#dropdown {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  margin-top: 20px;
+  margin-left: 50px;
+}
+#dropdown .btn-default {
+background-color:#fff;
+border-color:#fff;
+border-width:0 1px 0px 1px;
 }
 
 .img-dim {
