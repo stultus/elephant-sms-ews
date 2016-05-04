@@ -16,7 +16,7 @@ class Informer(models.Model):
 class Subscriber(models.Model):
     name = models.CharField("Name of the subscriber", max_length=200, blank=True, null=True)
     phone = models.CharField("Phone Number of the subscriber", max_length=10)
-    grids = models.CharField("Comma sperated grid numbers to get alerts", max_length=1000,null=True)
+    location = models.CharField("Comma sperated grid numbers to get alerts", max_length=1000,null=True)
     def __unicode__(self):
         return self.phone
 
