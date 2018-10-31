@@ -8,6 +8,7 @@ from . import views
 
 urlpatterns = [
     url(r'^$', views.HomePage.as_view(), name='home'),
+    url(r'home/^$', views.HomePage.as_view(), name='home'),
     url(r'^about/$', views.AboutPage.as_view(), name='about'),
     url(r'^sighting/(?P<duration>.+)/$', views.SitingPage.as_view(), name='sighting'),
     url(r'^messages/$',views.ReportPage.as_view(), name='messages'),
